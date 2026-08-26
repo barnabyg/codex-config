@@ -1,0 +1,8 @@
+# Keep this repository limited to global Markdown guidance.
+*
+!.gitignore
+!.gitattributes
+!/AGENTS.md
+!/instructions.md
+!/agent-guidance/
+!/agent-guidance/*.md
