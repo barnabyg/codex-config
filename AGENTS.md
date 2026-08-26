@@ -11,6 +11,13 @@ When a task includes commits:
 
 State which branch was pushed. Describe work as shipped or available from a normal clone only when the remote default branch contains it. When normal-clone availability matters, confirm the default branch and verify a clean checkout. Verify installation, startup, packaging, and deployment changes from a clean checkout when practical; ignored, untracked, or generated local files are not evidence.
 
+## Parallel agents and Git worktrees
+
+- Give each concurrent write-capable agent or task its own branch-backed worktree, created from an explicit base ref. Read-only agents may share a checkout. Keep all edits, builds, tests, and Git operations inside the assigned worktree.
+- Worktrees isolate files, not host resources. Namespace collision-prone ports, databases, temporary paths, build outputs, and container/Compose resources per worktree; serialize commands when safe isolation is unavailable.
+- Integrate completed branches and run full verification in one designated worktree. Never modify or remove another agent's active worktree; remove clean, preserved worktrees with `git worktree remove`.
+- If worktrees are unavailable, keep parallel agents read-only and serialize stateful work.
+
 ## GitHub and Node.js on native Windows
 
 Sandboxed `gh auth status` failures are inconclusive because the host user's credentials may be unavailable to the sandbox. Continue through the host-keyring route; do not initiate `gh auth login` from that evidence alone.
