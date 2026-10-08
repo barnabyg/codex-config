@@ -6,6 +6,7 @@ When a task includes commits:
 
 - Create one commit per implementation ticket or code-review finding. Keep unrelated work separate and stage selectively when work overlaps.
 - Each commit must pass its focused tests. Run full verification before pushing the complete series.
+- A passing full verification may satisfy both handoff and pre-push requirements when the verified tree is identical to the tree being pushed.
 - Ask before combining technically inseparable tickets or findings.
 - Preserve commit history: squash only when explicitly requested, and rewrite pushed history only with explicit approval.
 
@@ -49,3 +50,7 @@ For behavior changes, report:
 - important untested, uncertain, or out-of-scope behavior.
 
 Focus manual testing on changed behavior and regression risks rather than repeating automated commands. If meaningful manual testing does not apply, say so.
+
+## Commentary
+
+Minimize intermediate commentary. Do not narrate routine actions, searches, file reads, edits, or test runs. Provide intermediate updates only for significant findings, blockers, important decisions, or changes to the implementation plan.
