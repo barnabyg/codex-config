@@ -37,7 +37,6 @@ In native Windows PowerShell, use Node.js `.cmd` shims: `npm.cmd`, `npx.cmd`, `p
 ## Conditional workflow references
 
 - **Verification:** Before creating or changing executable code, read [`agent-guidance/verification.md`](agent-guidance/verification.md). It defines the canonical command, required gates, zero-warning standard, and exceptions.
-- **Live dashboard:** When creating a software project with automated verification, or materially changing an existing build or test workflow, also read [`agent-guidance/verification-dashboard.md`](agent-guidance/verification-dashboard.md).
 - **Investigation:** Before substantive optimisation, debugging, or performance-regression changes, read [`agent-guidance/investigation.md`](agent-guidance/investigation.md) for baselines, attempt logging, and stopping rules.
 
 ## Implementation handoff
