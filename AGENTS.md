@@ -16,8 +16,18 @@ State which branch was pushed. Describe work as shipped or available from a norm
 
 - Give each concurrent write-capable agent or task its own branch-backed worktree, created from an explicit base ref. Read-only agents may share a checkout. Keep all edits, builds, tests, and Git operations inside the assigned worktree.
 - Worktrees isolate files, not host resources. Namespace collision-prone ports, databases, temporary paths, build outputs, and container/Compose resources per worktree; serialize commands when safe isolation is unavailable.
-- Integrate completed branches and run full verification in one designated worktree. Never modify or remove another agent's active worktree; remove clean, preserved worktrees with `git worktree remove`.
+- Integrate completed branches and run full verification in one designated worktree. Never modify or remove another agent's active worktree.
 - If worktrees are unavailable, keep parallel agents read-only and serialize stateful work.
+
+## Post-merge cleanup
+
+Cleanup is part of completing PR work. When you merge a PR, or learn during an active or resumed task that its PR has merged, perform cleanup before the final handoff without waiting for a separate tidy-up request.
+
+- Confirm the PR's merged state and target branch through the hosting service. Inspect the task's worktrees and working directories for uncommitted, untracked, ignored, and unpushed work; preserve anything still needed before cleanup. A merged PR alone does not prove that all local work is preserved.
+- Stop task-owned background processes and release task-owned temporary resources. Keep shared resources and directories used by active tasks intact.
+- Archive unneeded Codex-managed worktrees through the app's worktree archive tool, preserving needed ignored files separately. Remove clean, manually managed worktrees with `git worktree remove`. Remove other task-created temporary working directories only after verifying their resolved paths and that they contain no needed work; use scoped removal rather than broad filesystem cleanup.
+- Delete task-owned local branches only after verifying their work is integrated or otherwise preserved. Prefer normal safe branch deletion; if it refuses (for example, after a squash merge), retain the branch and report why. Remote branch deletion requires explicit authorization or an established repository policy.
+- Verify cleanup and report what was removed or archived and anything retained with its reason. If cleanup is blocked, include the concrete remaining action in the handoff; treat cleanup as complete only when every task-owned resource is removed, archived, or deliberately retained with an explained reason.
 
 ## GitHub and Node.js on native Windows
 
@@ -35,6 +45,8 @@ In native Windows PowerShell, use Node.js `.cmd` shims: `npm.cmd`, `npx.cmd`, `p
 - Test critical workflows spanning UI, API, and storage at the user-facing boundary; unit or API tests alone are insufficient.
 
 ## Conditional workflow references
+
+Resolve the following paths relative to this global `AGENTS.md` file, not the project's working directory.
 
 - **Verification:** Before creating or changing executable code, read [`agent-guidance/verification.md`](agent-guidance/verification.md). It defines the canonical command, required gates, zero-warning standard, and exceptions.
 - **Investigation:** Before substantive optimisation, debugging, or performance-regression changes, read [`agent-guidance/investigation.md`](agent-guidance/investigation.md) for baselines, attempt logging, and stopping rules.
