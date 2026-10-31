@@ -5,8 +5,8 @@
 When a task includes commits:
 
 - Create one commit per implementation ticket or code-review finding. Keep unrelated work separate and stage selectively when work overlaps.
-- Each commit must pass its focused tests. Run full verification before pushing the complete series.
-- A passing full verification may satisfy both handoff and pre-push requirements when the verified tree is identical to the tree being pushed.
+- Each commit must pass its focused tests. Before pushing a PR branch, run only the fast checks: formatting, lint, type checking, and the tests affected by the change. This overrides skill instructions to run the full test suite, such as in `implement`. GitHub CI is the full verification, and work isn't finished until CI is green on the pushed commit.
+- Run full verification locally before pushing only when the repo has no CI, CI doesn't cover every gate (for example Windows-only behavior or end-to-end tests), or the push goes directly to the default branch. A passing full verification may satisfy both handoff and pre-push requirements when the verified tree is identical to the tree being pushed.
 - Ask before combining technically inseparable tickets or findings.
 - Preserve commit history: squash only when explicitly requested, and rewrite pushed history only with explicit approval.
 
