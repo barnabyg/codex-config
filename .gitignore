@@ -1,8 +1,10 @@
-# Keep this repository limited to global Markdown guidance.
+# Keep this repository limited to reviewed guidance and portable settings examples.
 *
 !.gitignore
 !.gitattributes
+!/README.md
 !/AGENTS.md
 !/instructions.md
+!/config.example.toml
 !/agent-guidance/
 !/agent-guidance/*.md

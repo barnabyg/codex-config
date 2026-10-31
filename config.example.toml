@@ -1,0 +1,14 @@
+# Portable preferences from the first Windows PC.
+# Merge reviewed values into your local config.toml; this file is not auto-loaded.
+personality = "pragmatic"
+model = "gpt-6.1-sol"
+model_reasoning_effort = "medium"
+service_tier = "default"
+
+[desktop]
+conversationDetailMode = "STEPS_COMMANDS"
+ambient-suggestions-enabled = true
+followUpQueueMode = "queue"
+show-context-window-usage = true
+enabled-reasoning-efforts = ["low", "medium", "high", "xhigh", "ultra", "max"]
+external-agent-import-sync-enabled = false
