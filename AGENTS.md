@@ -40,9 +40,12 @@ State which branch was pushed. Describe work as shipped or available from a norm
 - Configure CI test runners to stop on the first failure, avoiding wasted CI time after a run has already failed. Keep local test runs able to report all failures.
 - When creating or changing test configuration, use a CI-scoped setting: for Playwright, `maxFailures: process.env.CI ? 1 : 0`; for Vitest or Jest, use their equivalent CI-only `bail` setting. Do not indiscriminately impose fail-fast on local runs.
 
-## Long-running commands
+## Timeouts and long-running commands
 
-- Give unattended or background commands a hard wall-clock limit (roughly three times the expected duration). Capture logs and avoid watch/interactive modes. Treat a timeout as a possible hang; investigate before rerunning.
+- Give all execution timeouts significant headroom, including test, assertion, startup, command, and CI-job timeouts. As a default, allow at least three times the slowest reasonably expected successful duration in the target environment, accounting for cold starts, CI contention, and slower machines. Never set a timeout close to a typical observed runtime.
+- Ensure outer timeouts allow inner operations to finish, plus setup, teardown, and diagnostic collection.
+- Keep intentional performance thresholds separate from execution timeouts. Investigate timeout failures before increasing limits or rerunning; retain finite limits so genuine hangs are detected.
+- Give unattended or background commands a hard wall-clock limit using the margin above. Capture logs and avoid watch/interactive modes.
 - Use the timeout/process-control mechanism available in the current environment; do not assume Unix `timeout` exists in native Windows PowerShell. Ensure timed-out commands do not leave task-owned child processes running.
 
 ## Parallel agents and Git worktrees
