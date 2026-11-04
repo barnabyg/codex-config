@@ -10,6 +10,7 @@
 ## Defaults (unless project guidance overrides)
 
 - Check for existing tests and run the relevant focused tests after code changes. Follow the verification policy below for when a full suite is required; do not run a full suite merely because a generic skill says to.
+- Run all test suites with as much safe parallelism as available resources allow, locally and in CI: run independent suites concurrently and enable parallel workers within suites. Isolate shared mutable resources; serialize only tests or suites with unavoidable dependencies or resource conflicts, and document the reason.
 - Lint before committing.
 - Update relevant documentation when changing public interfaces.
 - Use conventional commit messages: `type(scope): description`.
