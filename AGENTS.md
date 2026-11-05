@@ -66,8 +66,9 @@ Cleanup is part of completing PR work. When you merge a PR, or learn during an a
 - Delete task-owned local branches only after verifying their work is integrated or otherwise preserved. Prefer normal safe branch deletion; if it refuses (for example, after a squash merge), retain the branch and report why. Remote branch deletion requires explicit authorisation or an established repository policy.
 - Verify cleanup and report what was removed or archived and anything retained with its reason. If cleanup is blocked, include the concrete remaining action in the handoff; treat cleanup as complete only when every task-owned resource is removed, archived, or deliberately retained with an explained reason.
 
-## Windows environment
+## Working environment
 
+- The health of the working environment is part of your objective. If you see a problem with disk space, performance or similar environment factor then look to fix the problems before proceeding with development work. If you are unable to fix the working environment then ask the user to do it for you.
 - The host environment is Windows 11. Use PowerShell syntax for native Windows commands when Bash alternatives are unavailable.
 - Commands given to the user to run manually must use PowerShell 7 (`pwsh`) in `powershell`-tagged code blocks. Use PowerShell constructs such as `foreach ($x in ...) { }` and `$env:VAR`; do not give the user Bash loops, heredocs, `export`, or Bash command substitution. Bash syntax is fine for agent-executed Bash commands.
 - Prefer forward slashes in paths where cross-platform tools support them. Prefer LF line endings for code files; be alert to CRLF/LF differences.
